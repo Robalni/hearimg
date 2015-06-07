@@ -81,7 +81,7 @@ void play_audio(struct audio_info *ai)
 struct audio_info *audio_init()
 {
   SDL_AudioSpec spec;
-  struct audio_info *ai = malloc(sizeof (struct audio_info));
+  struct audio_info *ai = calloc(1, sizeof (struct audio_info));
 
   SDL_zero(spec);
   spec.freq = 48000;

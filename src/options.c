@@ -25,14 +25,18 @@ void parse_options(int argc, char **argv)
 {
   int c;
   struct option longopts[] = {
+    {"continuous", no_argument, NULL, 'c'},
     {"help", no_argument, NULL, 'h'},
     {NULL, 0, NULL, 0}
   };
 
   options.argv0 = argv[0];
 
-  while ((c = getopt_long(argc, argv, "h", longopts, NULL)) != -1) {
+  while ((c = getopt_long(argc, argv, "ch", longopts, NULL)) != -1) {
     switch (c) {
+    case 'c':
+      options.continuous = 1;
+      break;
     case 'h':
       options.help = 1;
       break;

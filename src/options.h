@@ -21,6 +21,7 @@
 struct {
   char * argv0;
   char * mask_file;
+  int continuous;
   int help;
 } options;
 

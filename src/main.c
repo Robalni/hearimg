@@ -29,7 +29,7 @@ static void print_help(void);
 int main(int argc, char **argv)
 {
   Image *image;
-  Image *mask;
+  Image *mask = NULL;
   struct audio_info *ai1, *ai2;
   FILE *file;
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
   SDL_Init(SDL_INIT_AUDIO);
   ai1 = audio_init();
-  ai2 = malloc(sizeof ai2);
+  ai2 = malloc(sizeof (struct audio_info));
   memcpy(ai2, ai1, sizeof (struct audio_info));
 
   if (options.mask_file) {
@@ -56,6 +56,11 @@ int main(int argc, char **argv)
     play_audio(ai1);
     free(ai2->sounds);
     free_image(image);
+
+    if (!options.continuous) {
+      free(ai1->sounds);
+      break;
+    }
 
     image = read_image(stdin);
     ai2->sounds = image_to_audio(image, mask);

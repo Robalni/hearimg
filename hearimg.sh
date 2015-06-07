@@ -15,7 +15,7 @@ if [[ -p $pipe_name ]]; then
 fi
 mkfifo $pipe_name
 
-./hearimg < $pipe_name &
+./hearimg --continuous < $pipe_name &
 
 while [[ $running -ne 0 ]]; do
     import -window $win_id ppm:-
