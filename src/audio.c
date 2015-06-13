@@ -72,7 +72,6 @@ static void audio_callback(void *userdata, Uint8 *stream, int len)
 
 void play_audio(struct audio_info *ai)
 {
-  ai->bytes_played = 0;
   ai->spec.userdata = ai;
   SDL_PauseAudioDevice(ai->dev, 0);
 }
@@ -91,6 +90,7 @@ struct audio_info *audio_init()
   spec.callback = audio_callback;
   spec.userdata = ai;
   ai->dev = SDL_OpenAudioDevice(NULL, 0, &spec, &ai->spec, 0);
+  ai->bytes_played = 0;
 
   return ai;
 }
